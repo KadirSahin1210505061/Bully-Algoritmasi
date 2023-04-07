@@ -1,5 +1,7 @@
 # Bully-Algoritmasi
 Bully algoritması, bir dağıtık sistemde lider seçimi için kullanılan bir algoritmadır.
+
+
 using System;
 using System.Collections.Generic;
 
@@ -81,6 +83,8 @@ class BullyAlgorithm
         }
     }
 }
+
+
 Algoritmaların Amacı ve Çalışma Şekli:
 Bully algoritması, dağıtık sistemlerde lider seçimi için kullanılır. Sistemdeki her bir süreç birbirleriyle haberleşerek lider seçimini gerçekleştirir. Bully algoritması çalışma şekli olarak şu adımları içerir:
 
