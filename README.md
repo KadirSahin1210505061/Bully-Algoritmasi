@@ -4,7 +4,6 @@ Bully algoritması, bir dağıtık sistemde lider seçimi için kullanılan bir 
 
 using System;
 using System.Collections.Generic;
-
 class BullyAlgorithm
 {
     static void Main(string[] args)
