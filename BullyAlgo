@@ -1,0 +1,81 @@
+using System;
+using System.Collections.Generic;
+
+class BullyAlgorithm
+{
+    static void Main(string[] args)
+    {
+        int n = 5; // number of processes in the distributed system
+        int coordinator = n; // initialize coordinator as the last process
+
+        // create list of processes with their respective IDs
+        List<int> processes = new List<int>();
+        for (int i = 1; i <= n; i++)
+        {
+            processes.Add(i);
+        }
+
+        // simulate a process failure
+        int failedProcess = 3;
+        processes.Remove(failedProcess);
+
+        // simulate an election
+        foreach (int process in processes)
+        {
+            if (process > coordinator)
+            {
+                Console.WriteLine("Process {0} started an election.", process);
+                if (sendElection(process))
+                {
+                    coordinator = process;
+                }
+            }
+        }
+
+        Console.WriteLine("Process {0} is the new coordinator.", coordinator);
+    }
+
+    static bool sendElection(int process)
+    {
+        // send election message to higher priority processes
+        bool higherPriorityResponded = false;
+        for (int i = process + 1; i <= n; i++)
+        {
+            Console.WriteLine("Process {0} sent an election message to process {1}.", process, i);
+            // wait for response from higher priority processes
+            if (responds(process, i))
+            {
+                higherPriorityResponded = true;
+                break;
+            }
+        }
+
+        // if no higher priority processes respond, declare as coordinator
+        if (!higherPriorityResponded)
+        {
+            Console.WriteLine("Process {0} is the new coordinator.", process);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    static bool responds(int sender, int receiver)
+    {
+        // simulate a response from a process
+        Random random = new Random();
+        int response = random.Next(2);
+        if (response == 1)
+        {
+            Console.WriteLine("Process {0} responded to process {1}.", receiver, sender);
+            return true;
+        }
+        else
+        {
+            Console.WriteLine("Process {0} did not respond to process {1}.", receiver, sender);
+            return false;
+        }
+    }
+}
